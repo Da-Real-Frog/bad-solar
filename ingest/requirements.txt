@@ -1,0 +1,4 @@
+psycopg2-binary==2.9.9
+teslapy==2.8.0
+pypowerwall==0.15.11
+python-dotenv==1.0.0

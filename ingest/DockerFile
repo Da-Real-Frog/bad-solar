@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copies your ingest.py script into the container
+COPY ingest.py .
+
+# Executes the script
+CMD ["python", "-u", "ingest.py"]

@@ -1,0 +1,40 @@
+
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg14
+    container_name: solar_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+
+  ingest:
+    build: ./ingest
+    container_name: solar_ingest
+    restart: always
+    depends_on:
+      - timescaledb
+    env_file:
+      - .env
+    volumes:
+      # Maps the local cache file to prevent having to re-authenticate with Tesla
+      - ./.teslapy_cache:/app/.teslapy_cache
+
+  dashboard:
+    build: ./dashboard
+    container_name: solar_dashboard
+    restart: always
+    depends_on:
+      - timescaledb
+    env_file:
+      - .env
+    ports:
+      - "8501:8501"
+
+volumes:
+  timescaledb_data:

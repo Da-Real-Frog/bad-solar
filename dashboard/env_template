@@ -1,0 +1,21 @@
+# ==========================================
+# Database Configuration
+# ==========================================
+# For Docker Compose, the host must match the container name of the database service
+DB_HOST=timescaledb
+DB_PORT=5432
+DB_NAME=tesla_solar
+DB_USER=admin
+DB_PASSWORD=your_secure_password
+
+# ==========================================
+# Tesla Cloud API Credentials
+# ==========================================
+TESLA_EMAIL=your_tesla_email@example.com
+
+# ==========================================
+# Local Gateway (Powerwall) Credentials
+# ==========================================
+POWERWALL_IP=192.168.1.100 
+POWERWALL_PASSWORD=your_gateway_password
+POWERWALL_EMAIL=your_tesla_email@example.com
